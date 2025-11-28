@@ -16,6 +16,12 @@ class ApiTokenService implements ApiTokenServiceInterface
         private readonly EntityManagerInterface $entityManager,
     ) {}
 
+    /**
+     * Creates a new apiToken in the database based on the given user.
+     *
+     * @param User $user
+     * @return ApiToken
+     */
     public function create(User $user): ApiToken
     {
         $token = new ApiToken();

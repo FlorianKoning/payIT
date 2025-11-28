@@ -6,6 +6,7 @@ namespace App\Controller\Api;
 use App\DTO\API\UserResponse;
 use App\Interface\Service\ApiTokenServiceInterface;
 use App\Interface\Service\UserServiceInterface;
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
