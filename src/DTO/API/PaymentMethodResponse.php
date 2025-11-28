@@ -1,0 +1,14 @@
+<?php
+declare(strict_types=1);
+
+namespace App\DTO\API;
+
+use Symfony\Component\Validator\Constraints as Assert;
+
+class PaymentMethodResponse
+{
+    public function __construct(
+        #[Assert\NotBlank]
+        public readonly string $brands,
+    ) {}
+}
