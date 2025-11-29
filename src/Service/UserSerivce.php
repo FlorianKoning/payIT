@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\User;
-use App\DTO\API\UserResponse;
 use Doctrine\ORM\EntityRepository;
+use App\DTO\API\UserRequestResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Interface\Service\UserServiceInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -22,7 +22,7 @@ class UserSerivce implements UserServiceInterface
         $this->repository = $this->entityManager->getRepository(User::class);
     }
 
-    public function create(UserResponse $userDTO): User
+    public function create(UserRequestResponse $userDTO): User
     {
         // Validates the create DTO.
         $this->DTOValidator->validate($userDTO);

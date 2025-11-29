@@ -8,7 +8,7 @@ use App\Exception\MerchantNotFoundException;
 use App\Exception\ValidationFailedException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use App\Exception\PaymentMethodNotFoundException;
-use App\Interface\Service\ExceptionHandleServiceInterface;
+use App\Service\ResponseHandleService;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Doctrine\DBAL\Exception\ConstraintViolationException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,7 +20,7 @@ final class ApiExceptionSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly LoggerInterface $logger,
-        private readonly ExceptionHandleServiceInterface $exceptionHandleService,
+        private readonly ResponseHandleService $responseHandleService,
     ){}
 
     public function onKernelException(ExceptionEvent $event): void
@@ -43,29 +43,29 @@ final class ApiExceptionSubscriber implements EventSubscriberInterface
         // Creates the response based on the exception.
         $response = match (true) {
             $exception instanceof ValidationFailedException =>
-                $this->exceptionHandleService->createValidationResponse($exception->violations),
+                $this->responseHandleService->createValidationResponse($exception->violations),
 
             $exception instanceof MerchantNotFoundException =>
-                $this->exceptionHandleService->createJsonResponse('MERCHANT_NOT_FOUND', 'Could not find your requested merchant.', 404),
+                $this->responseHandleService->createJsonResponse('MERCHANT_NOT_FOUND', 'Could not find your requested merchant.', 404),
 
             $exception instanceof ConstraintViolationException =>
-                $this->exceptionHandleService->createJsonResponse('CONSTRAINT_VIOLATION', 'Database constraint violated.', 409),
+                $this->responseHandleService->createJsonResponse('CONSTRAINT_VIOLATION', 'Database constraint violated.', 409),
 
             $exception instanceof MissingConstructorArgumentsException =>
-                $this->exceptionHandleService->createJsonResponse('MISSING_ARGUMENT', 'Cannot make a merchant because a argument is missing.', 409),
+                $this->responseHandleService->createJsonResponse('MISSING_ARGUMENT', 'Cannot make a merchant because a argument is missing.', 409),
 
             $exception instanceof PaymentMethodNotFoundException =>
-                $this->exceptionHandleService->createJsonResponse('PAYMENT_METHOD_NOT_FOUND', 'Could not find your requested payment method.', 404),
+                $this->responseHandleService->createJsonResponse('PAYMENT_METHOD_NOT_FOUND', 'Could not find your requested payment method.', 404),
 
             $exception instanceof NotFoundHttpException =>
-                $this->exceptionHandleService->createJsonResponse('INVALID_ROUTE', 'You are trying to use a invalid API route.' ,404),
+                $this->responseHandleService->createJsonResponse('INVALID_ROUTE', 'You are trying to use a invalid API route.' ,404),
 
             $exception instanceof NotNormalizableValueException =>
-                $this->exceptionHandleService->createJsonResponse('INVALID_VALUE', 'Given brands is invalid, please check the documentation.' ,404),
+                $this->responseHandleService->createJsonResponse('INVALID_VALUE', 'Given brands is invalid, please check the documentation.' ,404),
 
 
             default =>
-                $this->exceptionHandleService->createJsonResponse('INTERNAL_ERROR', 'An unexpected error occurred.', 400),
+                $this->responseHandleService->createJsonResponse('INTERNAL_ERROR', 'An unexpected error occurred.', 400),
         };
 
         $event->setResponse($response);

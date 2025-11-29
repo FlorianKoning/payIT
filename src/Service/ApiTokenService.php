@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\DTO\API\RegisterResponse;
+use App\DTO\API\UserResponse;
 use DateTime;
 use App\Entity\User;
 use App\Entity\ApiToken;
@@ -29,9 +31,26 @@ class ApiTokenService implements ApiTokenServiceInterface
         $token->setExpiresAt((new DateTime())->modify('+1 year'));
 
         // Safes the new apiToken
-        $this->entityManager->persist($user);
+        $this->entityManager->persist($token);
         $this->entityManager->flush();
 
         return $token;
+    }
+
+    /**
+     * Creates a api safe response.
+     *
+     * @param ApiToken $apiToken
+     * @param User $user
+     * @return RegisterResponse
+     */
+    public function createResponse(ApiToken $apiToken, User $user): RegisterResponse
+    {
+        return new RegisterResponse(
+            token: $apiToken->getToken(),
+            expiresAt: $apiToken->getExpiresAt(),
+            lastUsedAt: $apiToken->getLastUsedAt(),
+            user: new UserResponse($user->getEmail()),
+        );
     }
 }

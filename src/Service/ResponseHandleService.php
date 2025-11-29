@@ -7,7 +7,7 @@ use App\Interface\Service\ExceptionHandleServiceInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ExceptionHandleService implements ExceptionHandleServiceInterface
+class ResponseHandleService implements ExceptionHandleServiceInterface
 {
     /**
      * Creates the the invalid validation json response.
