@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use Exception;
 use App\DTO\API\UserRequestResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
@@ -12,7 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Interface\Service\ApiTokenServiceInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 
 final class RegisterController extends AbstractController
 {
@@ -31,6 +29,7 @@ final class RegisterController extends AbstractController
         $user = $this->userService->create($userDTO);
         $apiToken = $this->apiTokenService->create($user);
 
+        // Creates the api response.
         $response = $this->apiTokenService->createResponse($apiToken, $user);
 
         return $this->json($response);

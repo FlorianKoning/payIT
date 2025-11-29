@@ -12,6 +12,7 @@ use App\Service\ResponseHandleService;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Doctrine\DBAL\Exception\ConstraintViolationException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
@@ -63,6 +64,8 @@ final class ApiExceptionSubscriber implements EventSubscriberInterface
             $exception instanceof NotNormalizableValueException =>
                 $this->responseHandleService->createJsonResponse('INVALID_VALUE', 'Given brands is invalid, please check the documentation.' ,404),
 
+            $exception instanceof HttpException =>
+                $this->responseHandleService->createJsonResponse("INVALID_HTTP_RESPONSE", $exception->getMessage(), 404),
 
             default =>
                 $this->responseHandleService->createJsonResponse('INTERNAL_ERROR', 'An unexpected error occurred.', 400),

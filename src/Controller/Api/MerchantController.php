@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\DTO\API\MerchantResponse;
-use App\DTO\API\PaymentMethodSearch;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,7 +19,7 @@ final class MerchantController extends AbstractController
         private readonly PaymentMethodServiceInterface $paymentMethodService,
     ) {}
 
-    #[Route('/api/{token}/merchant', methods: ['GET'])]
+    #[Route('/api/merchant', methods: ['GET'])]
     public function show(): JsonResponse
     {
         // $merchant = $this->merchantService->getByPublicId($publicId);
@@ -31,9 +29,8 @@ final class MerchantController extends AbstractController
     #[Route('/api/merchant', methods: ['POST'])]
     public function create(Request $request): JsonResponse
     {
-        // $createDto = $this->serializer->deserialize($request->getContent(), MerchantResponse::class, 'json');
-        // $merchant = $this->merchantService->create($createDto);
-
-        // return $this->json($merchant);
+        return $this->json([
+            'message' => 'create!',
+        ]);
     }
 }
