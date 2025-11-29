@@ -42,9 +42,8 @@ class Merchant
     #[ORM\Column(length: 32)]
     private ?string $SecretSalt = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    #[ORM\Column(length: 191)]
+    private ?string $publicId = null;
 
     public function getId(): ?int
     {
@@ -135,14 +134,14 @@ class Merchant
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getPublicId(): ?string
     {
-        return $this->user;
+        return $this->publicId;
     }
 
-    public function setUserId(?User $user): static
+    public function setPublicId(string $publicId): static
     {
-        $this->user = $user;
+        $this->publicId = $publicId;
 
         return $this;
     }

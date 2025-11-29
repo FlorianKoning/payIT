@@ -30,7 +30,6 @@ class UserSerivce implements UserServiceInterface
         // Sets up the new user
         $user = new User();
         $user->setEmail($userDTO->email);
-        $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->passwordHasher->hashPassword($user, $userDTO->password));
 
         // Safes the new user

@@ -13,11 +13,19 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            lazy: true
-            provider: app_user_provider
+        api:
+            pattern: ^/api
+            stateless: true
             custom_authenticators:
                 - App\Security\ApiKeyAuthenticator
+
+        main:
+            lazy: true
+            form_login:
+                login_path: app_login
+                check_path: app_login
+            logout:
+                path: app_logout
 
     access_control:
         - { path: ^/api/register, roles: PUBLIC_ACCESS }

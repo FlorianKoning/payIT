@@ -19,8 +19,8 @@ final class MerchantController extends AbstractController
         private readonly PaymentMethodServiceInterface $paymentMethodService,
     ) {}
 
-    #[Route('/api/merchant', methods: ['GET'])]
-    public function show(): JsonResponse
+    #[Route('/api/merchant/{publicId}', methods: ['GET'])]
+    public function show(string $publicId): JsonResponse
     {
         // $merchant = $this->merchantService->getByPublicId($publicId);
         // return $this->json($merchant, 200);
@@ -29,8 +29,6 @@ final class MerchantController extends AbstractController
     #[Route('/api/merchant', methods: ['POST'])]
     public function create(Request $request): JsonResponse
     {
-        return $this->json([
-            'message' => 'create!',
-        ]);
+
     }
 }
