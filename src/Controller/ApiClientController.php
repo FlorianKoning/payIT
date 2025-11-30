@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ApiClientController extends AbstractController
 {
-    #[Route('/api/client', name: 'app_api_client')]
+    #[Route('/tools/api-client', name: 'app_api_client')]
     public function index(): Response
     {
         return $this->render('api_client/index.html.twig', [

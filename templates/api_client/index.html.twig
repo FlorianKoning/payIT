@@ -3,18 +3,53 @@
 {% block title %}Hello ApiClientController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {{ component('Banner', { message: 'Your Api Clients' }) }}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="px-4 sm:px-6 lg:px-8 py-10">
+         <div class="py-2">
+            <div class="max-w-full mx-auto sm:px-6 lg:px-8 space-y-6">
+                <div class="p-4 sm:p-8 bg-banner shadow sm:rounded-lg">
+                    <div class="max-w-full">
+                        <div class="px-4 sm:px-6 lg:px-8">
+                            <div class="sm:flex justify-end sm:items-center">
+                                <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                                    <button type="button" class="rounded-md bg-secondMain px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-secondMain/80 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-second ease-in-out transition duration-300 cursor-pointer">Add item</button>
+                                </div>
+                            </div>
+                            <div class="mt-8 flow-root">
+                                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="inline-block min-w-full py-2 align-middle px-4">
+                                        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                                            <table class="min-w-full divide-y divide-gray-300">
+                                            <thead class="bg-gray-50">
+                                                <tr>
+                                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Client id</th>
+                                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Client Name</th>
+                                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Api Token</th>
+                                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-second">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                                                            <path d="M13.488 2.513a1.75 1.75 0 0 0-2.475 0L6.75 6.774a2.75 2.75 0 0 0-.596.892l-.848 2.047a.75.75 0 0 0 .98.98l2.047-.848a2.75 2.75 0 0 0 .892-.596l4.261-4.262a1.75 1.75 0 0 0 0-2.474Z" />
+                                                            <path d="M4.75 3.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h6.5c.69 0 1.25-.56 1.25-1.25V9A.75.75 0 0 1 14 9v2.25A2.75 2.75 0 0 1 11.25 14h-6.5A2.75 2.75 0 0 1 2 11.25v-6.5A2.75 2.75 0 0 1 4.75 2H7a.75.75 0 0 1 0 1.5H4.75Z" />
+                                                        </svg>
+                                                    </th>
+                                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-second">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                                                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm4-7a.75.75 0 0 0-.75-.75h-6.5a.75.75 0 0 0 0 1.5h6.5A.75.75 0 0 0 12 8Z" clip-rule="evenodd" />
+                                                        </svg>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-gray-200 bg-white">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/Learning/Symfony/PayIt/src/Controller/ApiClientController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/Learning/Symfony/PayIt/templates/api_client/index.html.twig</code></li>
-    </ul>
-</div>
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
