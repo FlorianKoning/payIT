@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-sidebar: #363942;
-  --color-sidebarText: #93989D;
-  --color-background: #F5F8FA;
-  --color-banner: #FFFFFF;
-  --color-title: #4F565D;
-  --color-sidebarHover: #2A2D34;
-  --color-sidebarTextHover: #ABB2B8;
+  --color-sidebar: #212529;
+  --color-sidebarText: #A7ACB1;
+  --color-sidebarHover: #2C3034;
+  --color-sidebarTextHover: #FFFFFF;
+  --color-sidebarBorder: #323846;
+  --color-background: #181C1F;
+  --color-banner: #212529;
+  --color-title: #DEE2E6;
+  --color-secondMain: #0D6EFD;
 }

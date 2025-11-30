@@ -1,0 +1,52 @@
+{% extends 'guest.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="px-4 sm:px-6 lg:px-8 py-10">
+        <form class="space-y-6" method="post">
+            <div class="flex flex-col w-full items-center">
+                <h1 class="text-white font-bold text-3xl">Please sign in</h1>
+                <p class="text-sidebarText text-sm">Access your account</p>
+            </div>
+
+            <div>
+                <label class="block font-medium text-sm text-white" for="username">Email</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" class="bg-banner text-white px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondMain focus:border-transparent rounded-md shadow-md block mt-1 w-full" autocomplete="email" required autofocus>
+            </div>
+
+
+            <div>
+                <label class="block font-medium text-sm text-white" for="password">Password</label>
+                <input class="bg-banner text-white px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondMain focus:border-transparent rounded-md shadow-md block mt-1 w-full" type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+                <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+            </div>
+
+            {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+
+                <div class="checkbox mb-3">
+                    <input type="checkbox" name="_remember_me" id="_remember_me">
+                    <label for="_remember_me">Remember me</label>
+                </div>
+            #}
+
+            <div class="pt-4">
+                <button type="submit" class="w-full bg-secondMain hover:bg-secondMain/80 text-white font-bold py-3 px-4 rounded-md transition duration-200 cursor-pointer">
+                    Sign In
+                </button>
+            </div>
+        </form>
+
+        {% if error %}
+            <div class="text-sm text-red-500 my-2">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <p class="text-sidebarText text-sm mt-1">You are already logged in! here you can <a class="underline hover:text-secondMain duration-300 ease-in-out" href="{{ path('app_logout') }}">logout!</a></p>
+        {% else %}
+            <p class="text-sidebarText text-sm mt-1">If you dont have an account, <a class="underline hover:text-secondMain duration-300 ease-in-out" href="{{ path('app_register') }}">register here</a></p>
+        {% endif %}
+    </div>
+{% endblock %}
